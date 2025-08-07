@@ -1,7 +1,7 @@
 const CACHE_NAME = "zaq_myapp_v5";
 const API_CACHE_NAME = "zaq_api_cache_v3";
 
-// URLs to cache for the app
+// URLs to cache for the app (include offline fallback)
 const urlsToCache = [
     './',
     './index.html',
@@ -13,7 +13,8 @@ const urlsToCache = [
     './app.js',
     './images/icons/favicon.ico',
     './images/icons/favicon.svg',
-    './images/icons/site.webmanifest'
+    './images/icons/site.webmanifest',
+    './offline.html' // fallback page
 ];
 
 // API endpoints to cache
@@ -31,13 +32,16 @@ self.addEventListener('install', (event) => {
             }),
             caches.open(API_CACHE_NAME).then((cache) => {
                 console.log('ZaqApp: Caching API endpoints...');
-                return cache.addAll(API_ENDPOINTS);
+                // For API we try to cache the request URLs (may fail if CORS prevents)
+                return cache.addAll(API_ENDPOINTS).catch(err => {
+                    console.warn('ZaqApp: Some API endpoints not cached at install (will be cached on fetch).', err);
+                });
             })
         ]).then(() => {
-            console.log('ZaqApp: All files cached successfully');
+            console.log('ZaqApp: All files cached successfully (install)');
             return self.skipWaiting();
         }).catch((error) => {
-            console.error('ZaqApp: Cache failed:', error);
+            console.error('ZaqApp: Cache failed during install:', error);
         })
     );
 });
@@ -65,42 +69,56 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    const url = new URL(event.request.url);
-    
-    // Skip chrome extensions
+    const request = event.request;
+    const url = new URL(request.url);
+
+    // Skip chrome/moz extensions
     if (url.protocol === 'chrome-extension:' || url.protocol === 'moz-extension:') {
         return;
     }
 
-    // Handle API requests
+    // Handle API requests (jsonplaceholder)
     if (url.hostname === 'jsonplaceholder.typicode.com') {
-        event.respondWith(handleApiRequest(event.request));
+        event.respondWith(handleApiRequest(request));
         return;
     }
 
-    // Handle app requests
-    if (url.origin === location.origin) {
-        event.respondWith(handleAppRequest(event.request));
+    // Handle navigation requests (HTML pages)
+    if (request.mode === 'navigate' || (request.headers.get('accept') && request.headers.get('accept').includes('text/html'))) {
+        event.respondWith(handleNavigationRequest(request));
         return;
     }
+
+    // Handle app static asset requests (CSS/JS/images/etc.)
+    if (url.origin === location.origin) {
+        event.respondWith(handleAppRequest(request));
+        return;
+    }
+
+    // Default: try network first then cache as fallback
+    event.respondWith(
+        fetch(request).catch(() => caches.match(request))
+    );
 });
 
 async function handleApiRequest(request) {
     try {
-        // Try to fetch from network first
+        // Network-first
         const networkResponse = await fetch(request);
-        
-        if (networkResponse.ok) {
-            // Cache the successful response
+        if (networkResponse && networkResponse.ok) {
             const responseClone = networkResponse.clone();
             const cache = await caches.open(API_CACHE_NAME);
-            cache.put(request, responseClone);
-            
+            try {
+                await cache.put(request, responseClone);
+            } catch (err) {
+                // Some responses may not be cacheable due to CORS; ignore
+                console.warn('ZaqApp: Unable to cache API response:', err);
+            }
             console.log('ZaqApp: API request successful, cached:', request.url);
             return networkResponse;
         }
     } catch (error) {
-        console.log('ZaqApp: Network request failed, trying cache:', request.url);
+        console.log('ZaqApp: Network request failed for API, trying cache:', request.url);
     }
 
     // If network fails, try cache
@@ -111,39 +129,81 @@ async function handleApiRequest(request) {
     }
 
     // If no cache, return empty array
-    console.log('ZaqApp: No cached data available');
+    console.log('ZaqApp: No cached API data available for', request.url);
     return new Response(JSON.stringify([]), {
         headers: { 'Content-Type': 'application/json' }
     });
 }
 
+async function handleNavigationRequest(request) {
+    // Try to serve the exact page from cache first (so about.html/contact.html work)
+    try {
+        const cachedPage = await caches.match(request);
+        if (cachedPage) {
+            return cachedPage;
+        }
+
+        // Not in cache: try network, then cache it for future navigations
+        const networkResponse = await fetch(request);
+        if (networkResponse && networkResponse.ok) {
+            // store copy in cache for offline use
+            const responseClone = networkResponse.clone();
+            const cache = await caches.open(CACHE_NAME);
+            try {
+                await cache.put(request, responseClone);
+            } catch (err) {
+                console.warn('ZaqApp: Could not cache navigation response:', err);
+            }
+            return networkResponse;
+        }
+    } catch (err) {
+        console.log('ZaqApp: Navigation fetch failed, falling back to offline page:', err);
+    }
+
+    // If everything failed, return offline fallback (offline.html)
+    const fallback = await caches.match('./offline.html');
+    if (fallback) {
+        return fallback;
+    }
+
+    // As last resort return index.html if offline.html missing
+    return caches.match('./index.html');
+}
+
 async function handleAppRequest(request) {
     try {
+        // Cache-first for static assets
         const cachedResponse = await caches.match(request);
         if (cachedResponse) {
             return cachedResponse;
         }
 
         const networkResponse = await fetch(request);
-        if (networkResponse.ok) {
+        if (networkResponse && networkResponse.ok) {
+            // cache the fetched asset for later
             const responseClone = networkResponse.clone();
             const cache = await caches.open(CACHE_NAME);
-            cache.put(request, responseClone);
+            try {
+                await cache.put(request, responseClone);
+            } catch (err) {
+                console.warn('ZaqApp: Could not cache asset:', err);
+            }
+            return networkResponse;
         }
-        return networkResponse;
     } catch (error) {
         console.log('ZaqApp: Failed to fetch app content:', error);
-        
-        // Return offline page for HTML requests
-        if (request.headers.get('accept').includes('text/html')) {
-            return caches.match('./index.html');
-        }
-        
-        return new Response('Offline - Service worker failed to fetch content', {
-            status: 503,
-            statusText: 'Service Unavailable'
-        });
     }
+
+    // Fallbacks
+    if (request.headers.get && request.headers.get('accept') && request.headers.get('accept').includes('text/html')) {
+        // navigation fallback handled elsewhere; this is defensive
+        return caches.match('./offline.html') || caches.match('./index.html');
+    }
+
+    return new Response('Offline - Service worker failed to fetch content', {
+        status: 503,
+        statusText: 'Service Unavailable'
+    });
 }
 
 // Handle background sync for offline data
@@ -158,11 +218,11 @@ async function doBackgroundSync() {
     try {
         const cache = await caches.open(API_CACHE_NAME);
         const requests = API_ENDPOINTS.map(url => new Request(url));
-        
+
         for (const request of requests) {
             try {
                 const response = await fetch(request);
-                if (response.ok) {
+                if (response && response.ok) {
                     await cache.put(request, response.clone());
                     console.log('ZaqApp: Background sync successful for:', request.url);
                 }
