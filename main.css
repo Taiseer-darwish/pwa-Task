@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+nav {
+  background-color: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e9ecef;
+  text-align: center;
+}
+
+nav a {
+  color: #495057;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 15px;
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+}
+
+nav a:hover {
+  background-color: #e9ecef;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border: 1px solid #dee2e6;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #212529;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #495057;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #6c757d;
+}
+
+/* API Section Styles */
+.api-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Posts Container */
+.posts-container {
+  display: block;
+  margin-top: 20px;
+}
+
+.post-card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.post-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #212529;
+  margin-bottom: 10px;
+}
+
+.post-body {
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.post-id {
+  background-color: #6c757d;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+/* Offline Message */
+.offline-message {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.offline-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #721c24;
+}
+
+.offline-message h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #721c24;
+}
+
+.offline-message p {
+  margin-bottom: 10px;
+  color: #721c24;
+}
+
+.offline-subtitle {
+  font-size: 0.9rem;
+  color: #721c24;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+}

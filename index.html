@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZaqApp - Home</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="main.css" />
+  <meta name="theme-color" content="#6c757d" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome to ZaqApp</h1>
+    <p>This is a simple Progressive Web App designed for beginners. The design is clean and easy to understand.</p>
+    
+    <div class="api-section">
+      <h2>Sample Posts</h2>
+      <p>Below are some sample posts loaded from an API:</p>
+      <div id="postsContainer" class="posts-container"></div>
+    </div>
+
+    <div id="offlineMessage" class="offline-message" hidden>
+      <div class="offline-icon">⚠️</div>
+      <h3>You are offline</h3>
+      <p>Please check your internet connection.</p>
+      <p class="offline-subtitle">You can still view cached content.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

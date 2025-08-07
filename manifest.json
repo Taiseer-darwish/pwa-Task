@@ -1,0 +1,76 @@
+{
+    "name" : "ZaqApp - Simple PWA",
+    "short_name" : "ZaqApp",
+    "description" : "A simple Progressive Web App for beginners",
+    "start_url" : "./",
+    "display" : "standalone",
+    "background_color" : "#ffffff",
+    "theme_color" : "#6c757d",
+    "lang": "en-US",
+    "orientation" : "portrait",
+    "scope" : "./",
+    "dir" :"ltr",
+    "icons" : [
+        {
+            "src": "images/icons/favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "images/icons/favicon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "images/icons/favicon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "form_factor": "narrow",
+            "label": "ZaqApp Screenshot 1"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Home",
+            "short_name": "Home",
+            "description": "Go to Home Page",
+            "url": "./index.html",
+            "icons": [
+                {
+                    "src": "images/icons/favicon.svg",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "About",
+            "short_name": "About",
+            "description": "Learn more about us",
+            "url": "./about.html",
+            "icons": [
+                {
+                    "src": "images/icons/favicon.svg",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Contact",
+            "short_name": "Contact",
+            "description": "Get in touch with us",
+            "url": "./contact.html",
+            "icons": [
+                {
+                    "src": "images/icons/favicon.svg",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false
+}
