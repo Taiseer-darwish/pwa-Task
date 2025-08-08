@@ -6,67 +6,67 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333333;
+  background-color: #1a1a1a;
+  color: #ffffff;
   line-height: 1.6;
   padding: 20px;
 }
 
 nav {
-  background-color: #f8f9fa;
+  background-color: #2d2d2d;
   padding: 15px;
   margin-bottom: 30px;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid #404040;
   text-align: center;
 }
 
 nav a {
-  color: #495057;
+  color: #cccccc;
   text-decoration: none;
   font-weight: bold;
   margin: 0 15px;
   padding: 8px 16px;
-  border: 1px solid #dee2e6;
-  background-color: #ffffff;
+  border: 1px solid #404040;
+  background-color: #333333;
 }
 
 nav a:hover {
-  background-color: #e9ecef;
+  background-color: #404040;
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #2d2d2d;
   padding: 30px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #404040;
 }
 
 h1 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #212529;
+  color: #ffffff;
   text-align: center;
 }
 
 h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #495057;
+  color: #e0e0e0;
   margin-top: 30px;
 }
 
 p {
   font-size: 1rem;
   margin-bottom: 15px;
-  color: #6c757d;
+  color: #cccccc;
 }
 
 /* API Section Styles */
 .api-section {
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #404040;
 }
 
 /* Posts Container */
@@ -76,8 +76,8 @@ p {
 }
 
 .post-card {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  background-color: #333333;
+  border: 1px solid #404040;
   padding: 20px;
   margin-bottom: 15px;
   text-align: left;
@@ -86,12 +86,12 @@ p {
 .post-title {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #212529;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 .post-body {
-  color: #6c757d;
+  color: #cccccc;
   line-height: 1.5;
   margin-bottom: 10px;
 }
@@ -101,11 +101,11 @@ p {
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
-  color: #6c757d;
+  color: #999999;
 }
 
 .post-id {
-  background-color: #6c757d;
+  background-color: #666666;
   color: white;
   padding: 4px 8px;
   border-radius: 3px;
@@ -114,8 +114,8 @@ p {
 
 /* Offline Message */
 .offline-message {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+  background-color: #4a2c2c;
+  border: 1px solid #6b3e3e;
   border-radius: 5px;
   padding: 20px;
   margin-top: 20px;
@@ -125,23 +125,23 @@ p {
 .offline-icon {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #721c24;
+  color: #ff6b6b;
 }
 
 .offline-message h3 {
   font-size: 1.3rem;
   margin-bottom: 10px;
-  color: #721c24;
+  color: #ff6b6b;
 }
 
 .offline-message p {
   margin-bottom: 10px;
-  color: #721c24;
+  color: #ff6b6b;
 }
 
 .offline-subtitle {
   font-size: 0.9rem;
-  color: #721c24;
+  color: #ff6b6b;
   font-style: italic;
 }
 

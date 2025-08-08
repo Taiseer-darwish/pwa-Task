@@ -1,53 +1,66 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZaqApp - Contact</title>
+  <title>ITI Students Portal - Contact</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="main.css" />
-  <meta name="theme-color" content="#6c757d" />
+  <meta name="theme-color" content="#666666" />
 </head>
 <body>
 
   <nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="about.html">حول</a>
-    <a href="contact.html">اتصل بنا</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
   <div class="container">
-    <h1>اتصل بنا</h1>
-    <p>تواصل معنا لأي استفسارات أو دعم فني.</p>
+    <h1>Contact ITI Support</h1>
+    <p>Get in touch with our technical support team for any issues with the student portal.</p>
     
-    <h2>معلومات الاتصال</h2>
-    <div style="background-color: #f8f9fa; padding: 20px; border: 1px solid #dee2e6; margin-bottom: 20px;">
-      <p><strong>البريد الإلكتروني:</strong> info@zaqapp.com</p>
-      <p><strong>الهاتف:</strong> +966 50 123 4567</p>
-      <p><strong>العنوان:</strong> الرياض، المملكة العربية السعودية</p>
+    <h2>Support Information</h2>
+    <div style="background-color: #333333; padding: 20px; border: 1px solid #404040; margin-bottom: 20px;">
+      <p><strong>Technical Support Email:</strong> support@iti.gov.eg</p>
+      <p><strong>Student Services Phone:</strong> +20 2 2345 6789</p>
+      <p><strong>ITI Main Office:</strong> Smart Village, Cairo, Egypt</p>
+      <p><strong>Support Hours:</strong> Sunday - Thursday, 8:00 AM - 4:00 PM</p>
     </div>
     
-    <h2>أرسل لنا رسالة</h2>
+    <h2>Submit a Support Ticket</h2>
     <form style="margin-top: 20px;">
       <div style="margin-bottom: 15px;">
-        <label for="name" style="display: block; margin-bottom: 5px; color: #495057;"><strong>الاسم:</strong></label>
-        <input type="text" id="name" name="name" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 3px;">
+        <label for="name" style="display: block; margin-bottom: 5px; color: #e0e0e0;"><strong>Student Name:</strong></label>
+        <input type="text" id="name" name="name" style="width: 100%; padding: 8px; border: 1px solid #404040; border-radius: 3px; background-color: #333333; color: #ffffff;">
       </div>
       
       <div style="margin-bottom: 15px;">
-        <label for="email" style="display: block; margin-bottom: 5px; color: #495057;"><strong>البريد الإلكتروني:</strong></label>
-        <input type="email" id="email" name="email" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 3px;">
+        <label for="email" style="display: block; margin-bottom: 5px; color: #e0e0e0;"><strong>Student Email:</strong></label>
+        <input type="email" id="email" name="email" style="width: 100%; padding: 8px; border: 1px solid #404040; border-radius: 3px; background-color: #333333; color: #ffffff;">
       </div>
       
       <div style="margin-bottom: 15px;">
-        <label for="message" style="display: block; margin-bottom: 5px; color: #495057;"><strong>الرسالة:</strong></label>
-        <textarea id="message" name="message" rows="4" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 3px;"></textarea>
+        <label for="issue" style="display: block; margin-bottom: 5px; color: #e0e0e0;"><strong>Issue Type:</strong></label>
+        <select id="issue" name="issue" style="width: 100%; padding: 8px; border: 1px solid #404040; border-radius: 3px; background-color: #333333; color: #ffffff;">
+          <option value="">Select an issue type</option>
+          <option value="login">Login Problems</option>
+          <option value="course">Course Access Issues</option>
+          <option value="assignment">Assignment Submission</option>
+          <option value="technical">Technical Support</option>
+          <option value="other">Other</option>
+        </select>
       </div>
       
-      <button type="submit" style="background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer;">إرسال الرسالة</button>
+      <div style="margin-bottom: 15px;">
+        <label for="message" style="display: block; margin-bottom: 5px; color: #e0e0e0;"><strong>Description:</strong></label>
+        <textarea id="message" name="message" rows="4" style="width: 100%; padding: 8px; border: 1px solid #404040; border-radius: 3px; background-color: #333333; color: #ffffff;"></textarea>
+      </div>
+      
+      <button type="submit" style="background-color: #666666; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer;">Submit Ticket</button>
     </form>
     
-    <button id="installBtn" hidden style="background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer; margin-top: 20px;">تثبيت التطبيق</button>
+    <button id="installBtn" hidden style="background-color: #666666; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer; margin-top: 20px;">Install App</button>
   </div>
 
   <script src="app.js"></script>
